@@ -5,7 +5,7 @@ Plugin Name: Scroll rss excerpt
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Description: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Author: Gopi.R
-Version: 1.0
+Version: 2.0
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: scroll, rss, excerpt
@@ -446,6 +446,17 @@ function srsse_widget($args)
 	$array = array("setting" => $srsse_setting);
 	echo srsse_shortcode($array);
 	echo $after_widget;
+}
+
+function ScrollRss( $atts ) 
+{
+	if(!is_numeric($atts)) 
+	{
+		$atts = 1;
+	}
+	$array = array();
+	$array["setting"]=$atts;
+	echo srsse_shortcode($array);
 }
 
 function srsse_init()
