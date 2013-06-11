@@ -5,7 +5,7 @@ Plugin Name: Scroll rss excerpt
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Description: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Author: Gopi.R
-Version: 2.1
+Version: 3.0
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: scroll, rss, excerpt
@@ -43,10 +43,11 @@ function srsse_admin_options()
 {
 	global $wpdb;
 	?>
-
 <div class="wrap">
-  <h2>Scroll rss excerpt</h2>
-</div>
+  <div class="form-wrap">
+    <div id="icon-edit" class="icon32 icon32-posts-post"><br>
+    </div>
+	<h2>Scroll rss excerpt</h2>
 <?php
 	$srsse_height_display_length_s1 = get_option('srsse_height_display_length_s1');
 	$srsse_height_display_length_s2 = get_option('srsse_height_display_length_s2');
@@ -79,6 +80,10 @@ function srsse_admin_options()
 	
 	if (@$_POST['srsse_submit']) 
 	{
+		
+		//	Just security thingy that wordpress offers us
+		check_admin_referer('srsse_form_setting');
+		
 		$srsse_height_1 = stripslashes($_POST['srsse_height_1']);
 		$srsse_display_1 = stripslashes($_POST['srsse_display_1']);
 		$srsse_length_1 = stripslashes($_POST['srsse_length_1']);
@@ -196,17 +201,19 @@ function srsse_admin_options()
       <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_4; ?>" name="srsse_length_4" id="srsse_length_4" /></td>
     </tr>
     <tr>
-      <td colspan="3" height="40" align="left"><input name="srsse_submit" id="srsse_submit" lang="publish" class="button-primary" value="Update All Settings" type="Submit" /></td>
+      <td colspan="3" height="50" align="left"><input name="srsse_submit" id="srsse_submit" lang="publish" class="button-primary" value="Update All Settings" type="Submit" /></td>
     </tr>
   </table>
+  <?php wp_nonce_field('srsse_form_setting'); ?>
 </form>
-<br />
-<strong>Plugin Configuration</strong>
-<ul>
-<li>Option 1. Use short code to add this plugin into posts and pages.</li>
-<li>Option 2. Drag and drop the widget .</li>
-</ul>
-Check official website for more info and live demo <a href="http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/" target="_blank">click here</a>
+	<h3>Plugin Configuration</h3>
+	<ul>
+		<li>Option 1. Use plugin short code to add this plugin into posts and pages.</li>
+		<li>Option 2. Drag and drop the widget.</li>
+	</ul>
+    <p class="description">Check official website for more information <a href="http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/" target="_blank">Click here</a></p>
+  </div>
+</div>
 <?php
 }
 

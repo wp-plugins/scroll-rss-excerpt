@@ -4,9 +4,9 @@ Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpres
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: vertical, marquee, plugin
-Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 2.1
+Requires at least: 3.4
+Tested up to: 3.6
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -73,6 +73,11 @@ Option to add the scroll directly in the theme file.
 = 2.1 =	
 Tested up to 3.5
 
+= 3.0 =	
+
+Tested up to 3.6
+Added some security feature.
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -84,3 +89,8 @@ Option to add the scroll directly in the theme file.
 
 = 2.1 =	
 Tested up to 3.5
+
+= 3.0 =	
+
+Tested up to 3.6
+Added some security feature.
