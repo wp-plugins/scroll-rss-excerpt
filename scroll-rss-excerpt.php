@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Scroll rss excerpt
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Description: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Author: Gopi.R
-Version: 3.0
+Version: 3.1
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: scroll, rss, excerpt
@@ -47,7 +46,7 @@ function srsse_admin_options()
   <div class="form-wrap">
     <div id="icon-edit" class="icon32 icon32-posts-post"><br>
     </div>
-	<h2>Scroll rss excerpt</h2>
+	<h2><?php _e('Scroll rss excerpt', 'scroll-rss-excerpt'); ?></h2>
 <?php
 	$srsse_height_display_length_s1 = get_option('srsse_height_display_length_s1');
 	$srsse_height_display_length_s2 = get_option('srsse_height_display_length_s2');
@@ -78,9 +77,8 @@ function srsse_admin_options()
 	$srsse_display_4 = @$srsse_height_display_length_s4[1];
 	$srsse_length_4 = @$srsse_height_display_length_s4[2];
 	
-	if (@$_POST['srsse_submit']) 
+	if (isset($_POST['srsse_submit'])) 
 	{
-		
 		//	Just security thingy that wordpress offers us
 		check_admin_referer('srsse_form_setting');
 		
@@ -119,62 +117,67 @@ function srsse_admin_options()
 		update_option('srsse_s3', $srsse_s3 );
 		update_option('srsse_s4', $srsse_s4 );
 		
+		?>
+		<div class="updated fade">
+			<p><strong><?php _e('Details successfully updated.', 'scroll-rss-excerpt'); ?></strong></p>
+		</div>
+		<?php
 	}
 	
 	?>
 <form name="srsse_form" method="post" action="">
   <table width="620" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td colspan="3"><h3>Setting 1</h3></td>
+      <td colspan="3"><h3><?php _e('Setting 1', 'scroll-rss-excerpt'); ?></h3></td>
     </tr>
     <tr>
-      <td colspan="3">RSS Link</td>
+      <td colspan="3"><?php _e('RSS Link', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td height="30" colspan="3"><input  style="width: 600px;" type="text" value="<?php echo @$srsse_s1; ?>" name="srsse_s1" id="srsse_s1" /></td>
     </tr>
     <tr>
-      <td height="30" width="160">Each Record Height</td>
-      <td width="160">Display Records #</td>
-      <td width="300">Text Length</td>
+      <td height="30" width="160"><?php _e('Each Record Height', 'scroll-rss-excerpt'); ?></td>
+      <td width="160"><?php _e('Display Records #', 'scroll-rss-excerpt'); ?></td>
+      <td width="300"><?php _e('Text Length', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_1; ?>" name="srsse_height_1" id="srsse_height_1" /></td>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_display_1; ?>" name="srsse_display_1" id="srsse_display_1" /></td>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_1; ?>" name="srsse_length_1" id="srsse_length_1" /></td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_1; ?>" name="srsse_height_1" id="srsse_height_1" /> (Ex: 200)</td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_display_1; ?>" name="srsse_display_1" id="srsse_display_1" /> (Ex: 4)</td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_1; ?>" name="srsse_length_1" id="srsse_length_1" /> (Ex: 200)</td>
     </tr>
     <tr>
-      <td colspan="3"><h3>Setting 2</h3></td>
+      <td colspan="3"><h3><?php _e('Setting 2', 'scroll-rss-excerpt'); ?></h3></td>
     </tr>
     <tr>
-      <td colspan="3">RSS Link</td>
+      <td colspan="3"><?php _e('RSS Link', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td height="30" colspan="3"><input  style="width: 600px;" type="text" value="<?php echo @$srsse_s2; ?>" name="srsse_s2" id="srsse_s2" /></td>
     </tr>
     <tr>
-      <td height="30">Each Record Height</td>
-      <td>Display Records #</td>
-      <td>Text Length</td>
+      <td height="30"><?php _e('Each Record Height', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Display Records #', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Text Length', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_2; ?>" name="srsse_height_2" id="srsse_height_2" /></td>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_display_2; ?>" name="srsse_display_2" id="srsse_display_2" /></td>
-      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_2; ?>" name="srsse_length_2" id="srsse_length_2" /></td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_2; ?>" name="srsse_height_2" id="srsse_height_2" /> (Ex: 200)</td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_display_2; ?>" name="srsse_display_2" id="srsse_display_2" /> (Ex: 4)</td>
+      <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_2; ?>" name="srsse_length_2" id="srsse_length_2" /> (Ex: 200)</td>
     </tr>
     <tr>
-      <td colspan="3"><h3>Setting 3</h3></td>
+      <td colspan="3"><h3><?php _e('Setting 3', 'scroll-rss-excerpt'); ?></h3></td>
     </tr>
     <tr>
-      <td colspan="3">RSS Link</td>
+      <td colspan="3"><?php _e('RSS Link', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td height="30" colspan="3"><input  style="width: 600px;" type="text" value="<?php echo @$srsse_s3; ?>" name="srsse_s3" id="srsse_s3" /></td>
     </tr>
     <tr>
-      <td height="30">Each Record Height</td>
-      <td>Display Records #</td>
-      <td>Text Length</td>
+      <td height="30"><?php _e('Each Record Height', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Display Records #', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Text Length', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_3; ?>" name="srsse_height_3" id="srsse_height_3" /></td>
@@ -182,18 +185,18 @@ function srsse_admin_options()
       <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_length_3; ?>" name="srsse_length_3" id="srsse_length_3" /></td>
     </tr>
     <tr>
-      <td colspan="3"><h3>Setting 4</h3></td>
+      <td colspan="3"><h3><?php _e('Setting 4', 'scroll-rss-excerpt'); ?></h3></td>
     </tr>
     <tr>
-      <td colspan="3">RSS Link</td>
+      <td colspan="3"><?php _e('RSS Link', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td height="30" colspan="3"><input  style="width: 600px;" type="text" value="<?php echo @$srsse_s4; ?>" name="srsse_s4" id="srsse_s4" /></td>
     </tr>
     <tr>
-      <td height="30">Each Record Height</td>
-      <td>Display Records #</td>
-      <td>Text Length</td>
+      <td height="30"><?php _e('Each Record Height', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Display Records #', 'scroll-rss-excerpt'); ?></td>
+      <td><?php _e('Text Length', 'scroll-rss-excerpt'); ?></td>
     </tr>
     <tr>
       <td><input  style="width: 100px;" type="text" value="<?php echo @$srsse_height_4; ?>" name="srsse_height_4" id="srsse_height_4" /></td>
@@ -206,12 +209,13 @@ function srsse_admin_options()
   </table>
   <?php wp_nonce_field('srsse_form_setting'); ?>
 </form>
-	<h3>Plugin Configuration</h3>
+	<h3><?php _e('Plugin Configuration', 'scroll-rss-excerpt'); ?></h3>
 	<ul>
-		<li>Option 1. Use plugin short code to add this plugin into posts and pages.</li>
-		<li>Option 2. Drag and drop the widget.</li>
+		<li><?php _e('Option 1. Use plugin short code to add this plugin into posts and pages.', 'scroll-rss-excerpt'); ?></li>
+		<li><?php _e('Option 2. Drag and drop the widget.', 'scroll-rss-excerpt'); ?></li>
 	</ul>
-    <p class="description">Check official website for more information <a href="http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/" target="_blank">Click here</a></p>
+    <p class="description"><?php _e('Check official website for more information', 'scroll-rss-excerpt'); ?> 
+	<a href="http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/" target="_blank"><?php _e('Click here', 'scroll-rss-excerpt'); ?></a></p>
   </div>
 </div>
 <?php
@@ -265,117 +269,124 @@ function srsse_shortcode( $atts )
 	
 	$xml = "";
 	$cnt=0;
-	$f = fopen( $url, 'r' );
-	while( $data = fread( $f, 4096 ) ) { $xml .= $data; }
-	fclose( $f );
-	preg_match_all( "/\<item\>(.*?)\<\/item\>/s", $xml, $itemblocks );
-
-	if ( ! empty($itemblocks) ) 
+	$content = @file_get_contents($url);
+	if (strpos($http_response_header[0], "200")) 
 	{
-		$srsse_count = 0;
-		$srsse_html = "";
-		$IRjsjs = "";
-		$srsse_x = "";
-		foreach( $itemblocks[1] as $block )
+		$f = fopen( $url, 'r' );
+		while( $data = fread( $f, 4096 ) ) { $xml .= $data; }
+		fclose( $f );
+		preg_match_all( "/\<item\>(.*?)\<\/item\>/s", $xml, $itemblocks );
+	
+		if ( ! empty($itemblocks) ) 
 		{
-			$srsse_target = "_blank";
-			
-			preg_match_all( "/\<title\>(.*?)\<\/title\>/",  $block, $title );
-			preg_match_all( "/\<link\>(.*?)\<\/link\>/", $block, $link );
-			preg_match_all( "/\<description\>(.*?)\<\/description\>/", $block, $description );
-			
-			$srsse_title = $title[1][0];
-			$srsse_title = mysql_real_escape_string(trim($srsse_title));
-			$srsse_link = $link[1][0];
-			$srsse_link = trim($srsse_link);
-			$srsse_text = $description[1][0];
-			$srsse_text = str_replace("&lt;![CDATA[","",$srsse_text);
-			$srsse_text = str_replace("<![CDATA[","",$srsse_text);
-			$srsse_text = str_replace("]]&gt;","",$srsse_text);
-			$srsse_text = str_replace("]]>","",$srsse_text);
-			
-			if(is_numeric($srsse_textlength))
-			{
-				if($srsse_textlength <> "" && $srsse_textlength > 0 )
-				{
-					// $srsse_text = substr($srsse_text, 0, $srsse_textlength);
-					$srsse_text = srsse_excerpt_max_charlength($srsse_textlength, $srsse_text);
-				}
-			}
-			
-			$srsse_scrollheights = $srsse_scrollheight."px";	
-			
-			$srsse_html = $srsse_html . "<div class='srsse_div' style='height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;'>"; 
-			
-			if($srsse_title <> "" )
-			{
-				$srsse_html = $srsse_html . "<div style='padding-left:4px;'><strong>";	
-				$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'><strong>";				
-				if($srsse_link <> "" ) 
-				{ 
-					$srsse_html = $srsse_html . "<a href='$srsse_link'>"; 
-					$IRjsjs = $IRjsjs . "<a href=\'$srsse_link\'>";
-				} 
-				$srsse_html = $srsse_html . $srsse_title;
-				$IRjsjs = $IRjsjs . $srsse_title;
-				if($srsse_link <> "" ) 
-				{ 
-					$srsse_html = $srsse_html . "</a>"; 
-					$IRjsjs = $IRjsjs . "</a>";
-				}
-				$srsse_html = $srsse_html . "</strong></div>";
-				$IRjsjs = $IRjsjs . "</strong></div>";
-			}
-			
-			if($srsse_text <> "" )
-			{
-				$srsse_html = $srsse_html . "<div style='padding-left:4px;'>$srsse_text</div>";	
-				$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'>$srsse_text</div>";	
-			}
-			
-			$srsse_html = $srsse_html . "</div>";
-			
-			$srsse_x = $srsse_x . "rssslider[$srsse_count] = '<div class=\'srsse_div\' style=\'height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;\'>$IRjsjs</div>'; ";	
-			$srsse_count++;
+			$srsse_count = 0;
+			$srsse_html = "";
 			$IRjsjs = "";
-		}
-		
-		$srsse_scrollheight = $srsse_scrollheight + 4;
-		if($srsse_count >= $srsse_sametimedisplay)
-		{
-			$srsse_count = $srsse_sametimedisplay;
-			$srsse_scrollheight_New = ($srsse_scrollheight * $srsse_sametimedisplay);
-		}
-		else
-		{
-			$srsse_count = $srsse_count;
-			$srsse_scrollheight_New = ($srsse_count  * $srsse_scrollheight);
+			$srsse_x = "";
+			foreach( $itemblocks[1] as $block )
+			{
+				$srsse_target = "_blank";
+				
+				preg_match_all( "/\<title\>(.*?)\<\/title\>/",  $block, $title );
+				preg_match_all( "/\<link\>(.*?)\<\/link\>/", $block, $link );
+				preg_match_all( "/\<description\>(.*?)\<\/description\>/", $block, $description );
+				
+				$srsse_title = $title[1][0];
+				$srsse_title = mysql_real_escape_string(trim($srsse_title));
+				$srsse_link = $link[1][0];
+				$srsse_link = trim($srsse_link);
+				$srsse_text = $description[1][0];
+				$srsse_text = str_replace("&lt;![CDATA[","",$srsse_text);
+				$srsse_text = str_replace("<![CDATA[","",$srsse_text);
+				$srsse_text = str_replace("]]&gt;","",$srsse_text);
+				$srsse_text = str_replace("]]>","",$srsse_text);
+				
+				if(is_numeric($srsse_textlength))
+				{
+					if($srsse_textlength <> "" && $srsse_textlength > 0 )
+					{
+						// $srsse_text = substr($srsse_text, 0, $srsse_textlength);
+						$srsse_text = srsse_excerpt_max_charlength($srsse_textlength, $srsse_text);
+					}
+				}
+				
+				$srsse_scrollheights = $srsse_scrollheight."px";	
+				
+				$srsse_html = $srsse_html . "<div class='srsse_div' style='height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;'>"; 
+				
+				if($srsse_title <> "" )
+				{
+					$srsse_html = $srsse_html . "<div style='padding-left:4px;'><strong>";	
+					$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'><strong>";				
+					if($srsse_link <> "" ) 
+					{ 
+						$srsse_html = $srsse_html . "<a href='$srsse_link'>"; 
+						$IRjsjs = $IRjsjs . "<a href=\'$srsse_link\'>";
+					} 
+					$srsse_html = $srsse_html . $srsse_title;
+					$IRjsjs = $IRjsjs . $srsse_title;
+					if($srsse_link <> "" ) 
+					{ 
+						$srsse_html = $srsse_html . "</a>"; 
+						$IRjsjs = $IRjsjs . "</a>";
+					}
+					$srsse_html = $srsse_html . "</strong></div>";
+					$IRjsjs = $IRjsjs . "</strong></div>";
+				}
+				
+				if($srsse_text <> "" )
+				{
+					$srsse_html = $srsse_html . "<div style='padding-left:4px;'>$srsse_text</div>";	
+					$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'>$srsse_text</div>";	
+				}
+				
+				$srsse_html = $srsse_html . "</div>";
+				
+				$srsse_x = $srsse_x . "rssslider[$srsse_count] = '<div class=\'srsse_div\' style=\'height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;\'>$IRjsjs</div>'; ";	
+				$srsse_count++;
+				$IRjsjs = "";
+			}
+			
+			$srsse_scrollheight = $srsse_scrollheight + 4;
+			if($srsse_count >= $srsse_sametimedisplay)
+			{
+				$srsse_count = $srsse_sametimedisplay;
+				$srsse_scrollheight_New = ($srsse_scrollheight * $srsse_sametimedisplay);
+			}
+			else
+			{
+				$srsse_count = $srsse_count;
+				$srsse_scrollheight_New = ($srsse_count  * $srsse_scrollheight);
+			}
+			$rssslider = "";
+			$rssslider = $rssslider . '<div style="padding-top:8px;padding-bottom:8px;">';
+			$rssslider = $rssslider . '<div style="text-align:left;vertical-align:middle;text-decoration: none;overflow: hidden; position: relative; margin-left: 3px; height: '. @$srsse_scrollheight .'px;" id="ScrollRssExpertDIV">'.@$srsse_html.'</div>';
+			$rssslider = $rssslider . '</div>';
+			$rssslider = $rssslider . '<script type="text/javascript">';
+			$rssslider = $rssslider . 'var rssslider = new Array();';
+			$rssslider = $rssslider . "var objrssslider	= '';";
+			$rssslider = $rssslider . "var srsse_scrollPos 	= '';";
+			$rssslider = $rssslider . "var srsse_numScrolls	= '';";
+			$rssslider = $rssslider . 'var srsse_heightOfElm = '. @$srsse_scrollheight. ';';
+			$rssslider = $rssslider . 'var srsse_numberOfElm = '. @$srsse_count. ';';
+			$rssslider = $rssslider . "var srsse_scrollOn 	= 'true';";
+			$rssslider = $rssslider . 'function StartScrollRssExcerpt() ';
+			$rssslider = $rssslider . '{';
+			$rssslider = $rssslider . @$srsse_x;
+			$rssslider = $rssslider . "ObjScrollRssExcerpt	= document.getElementById('ScrollRssExpertDIV');";
+			$rssslider = $rssslider . "ObjScrollRssExcerpt.style.height = (srsse_numberOfElm * srsse_heightOfElm) + 'px';";
+			$rssslider = $rssslider . 'ScrollRssExcerptContent();';
+			$rssslider = $rssslider . '}';
+			$rssslider = $rssslider . '</script>';
+			$rssslider = $rssslider . '<script type="text/javascript">';
+			$rssslider = $rssslider . 'StartScrollRssExcerpt();';
+			$rssslider = $rssslider . '</script>';
 		}
 	}
-	
-	$rssslider = "";
-	$rssslider = $rssslider . '<div style="padding-top:8px;padding-bottom:8px;">';
-	$rssslider = $rssslider . '<div style="text-align:left;vertical-align:middle;text-decoration: none;overflow: hidden; position: relative; margin-left: 3px; height: '. @$srsse_scrollheight .'px;" id="ScrollRssExpertDIV">'.@$srsse_html.'</div>';
-	$rssslider = $rssslider . '</div>';
-	$rssslider = $rssslider . '<script type="text/javascript">';
-	$rssslider = $rssslider . 'var rssslider = new Array();';
-	$rssslider = $rssslider . "var objrssslider	= '';";
-	$rssslider = $rssslider . "var srsse_scrollPos 	= '';";
-	$rssslider = $rssslider . "var srsse_numScrolls	= '';";
-	$rssslider = $rssslider . 'var srsse_heightOfElm = '. @$srsse_scrollheight. ';';
-	$rssslider = $rssslider . 'var srsse_numberOfElm = '. @$srsse_count. ';';
-	$rssslider = $rssslider . "var srsse_scrollOn 	= 'true';";
-	$rssslider = $rssslider . 'function StartScrollRssExcerpt() ';
-	$rssslider = $rssslider . '{';
-	$rssslider = $rssslider . @$srsse_x;
-	$rssslider = $rssslider . "ObjScrollRssExcerpt	= document.getElementById('ScrollRssExpertDIV');";
-	$rssslider = $rssslider . "ObjScrollRssExcerpt.style.height = (srsse_numberOfElm * srsse_heightOfElm) + 'px';";
-	$rssslider = $rssslider . 'ScrollRssExcerptContent();';
-	$rssslider = $rssslider . '}';
-	$rssslider = $rssslider . '</script>';
-	$rssslider = $rssslider . '<script type="text/javascript">';
-	$rssslider = $rssslider . 'StartScrollRssExcerpt();';
-	$rssslider = $rssslider . '</script>';
+	else
+	{
+		$rssslider = __('Invalid or Broken rss link.', 'scroll-rss-excerpt');
+	}
 	return $rssslider;
 }
 
@@ -383,7 +394,8 @@ function srsse_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Scroll rss excerpt', 'Scroll rss excerpt', 'manage_options', __FILE__, 'srsse_admin_options' );
+		add_options_page( __('Scroll rss excerpt', 'scroll-rss-excerpt'), 
+							__('Scroll rss excerpt', 'scroll-rss-excerpt'), 'manage_options', __FILE__, 'srsse_admin_options' );
 	}
 }
 
@@ -415,7 +427,7 @@ function srsse_control()
 {
 	$srsse_widgettitle = get_option('srsse_widgettitle');
 	$srsse_setting = get_option('srsse_setting');
-	if (@$_POST['srsse_submit']) 
+	if (isset($_POST['srsse_submit']))
 	{
 		$srsse_widgettitle = $_POST['srsse_widgettitle'];
 		$srsse_setting = $_POST['srsse_setting'];
@@ -470,12 +482,12 @@ function srsse_init()
 {
 	if(function_exists('wp_register_sidebar_widget')) 
 	{
-		wp_register_sidebar_widget('Scroll rss excerpt', 'Scroll rss excerpt', 'srsse_widget');
+		wp_register_sidebar_widget( __('Scroll rss excerpt', 'scroll-rss-excerpt'), __('Scroll rss excerpt', 'scroll-rss-excerpt'), 'srsse_widget');
 	}
 	
 	if(function_exists('wp_register_widget_control')) 
 	{
-		wp_register_widget_control('Scroll rss excerpt', array('Scroll rss excerpt', 'widgets'), 'srsse_control');
+		wp_register_widget_control( __('Scroll rss excerpt', 'scroll-rss-excerpt'), array( __('Scroll rss excerpt', 'scroll-rss-excerpt'), 'widgets'), 'srsse_control');
 	} 
 }
 
@@ -484,6 +496,12 @@ function srsse_deactivation()
 	// No action required.
 }
 
+function srsse_textdomain() 
+{
+	  load_plugin_textdomain( 'scroll-rss-excerpt', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'srsse_textdomain');
 add_action("plugins_loaded", "srsse_init");
 add_shortcode( 'scroll-rss-excerpt', 'srsse_shortcode' );
 register_activation_hook(__FILE__, 'srsse_install');

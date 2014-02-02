@@ -47,4 +47,3 @@ function ScrollRssExcerptContent() {
 	// start scrolling
 	setTimeout("ScrollRssExcerptSlider();", 2000);
 }
-

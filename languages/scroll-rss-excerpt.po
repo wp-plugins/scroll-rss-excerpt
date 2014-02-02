@@ -1,0 +1,85 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Scroll rss excerpt\n"
+"POT-Creation-Date: 2014-02-02 11:29+0800\n"
+"PO-Revision-Date: 2014-02-02 11:29+0800\n"
+"Last-Translator: \n"
+"Language-Team: www.gopiplus.com <www.gopiplus.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../scroll-rss-excerpt.php:49 ../scroll-rss-excerpt.php:397
+#: ../scroll-rss-excerpt.php:398 ../scroll-rss-excerpt.php:485
+#: ../scroll-rss-excerpt.php:490
+msgid "Scroll rss excerpt"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:122
+msgid "Details successfully updated."
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:131
+msgid "Setting 1"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:134 ../scroll-rss-excerpt.php:153
+#: ../scroll-rss-excerpt.php:172 ../scroll-rss-excerpt.php:191
+msgid "RSS Link"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:140 ../scroll-rss-excerpt.php:159
+#: ../scroll-rss-excerpt.php:178 ../scroll-rss-excerpt.php:197
+msgid "Each Record Height"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:141 ../scroll-rss-excerpt.php:160
+#: ../scroll-rss-excerpt.php:179 ../scroll-rss-excerpt.php:198
+msgid "Display Records #"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:142 ../scroll-rss-excerpt.php:161
+#: ../scroll-rss-excerpt.php:180 ../scroll-rss-excerpt.php:199
+msgid "Text Length"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:150
+msgid "Setting 2"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:169
+msgid "Setting 3"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:188
+msgid "Setting 4"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:212
+msgid "Plugin Configuration"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:214
+msgid ""
+"Option 1. Use plugin short code to add this plugin into posts and pages."
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:215
+msgid "Option 2. Drag and drop the widget."
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:217
+msgid "Check official website for more information"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:218
+msgid "Click here"
+msgstr ""
+
+#: ../scroll-rss-excerpt.php:388
+msgid "Invalid or Broken rss link."
+msgstr ""
