@@ -27,13 +27,13 @@ function srsse_install()
 	global $wpdb;
 	add_option('srsse_widgettitle', "Scroll rss excerpt");
 	add_option('srsse_setting', "1");
-	add_option('srsse_height_display_length_s1', "200_4_200");
+	add_option('srsse_height_display_length_s1', "200_4_20");
 	add_option('srsse_s1', "http://www.gopiplus.com/work/category/word-press-plug-in/feed/");
-	add_option('srsse_height_display_length_s2', "190_3_200");
+	add_option('srsse_height_display_length_s2', "190_3_20");
 	add_option('srsse_s2', "http://www.wordpress.org/news/feed/");
-	add_option('srsse_height_display_length_s3', "190_2_200");	
+	add_option('srsse_height_display_length_s3', "190_2_20");	
 	add_option('srsse_s3', "http://www.gopiplus.com/extensions/feed");
-	add_option('srsse_height_display_length_s4', "190_4_200");	
+	add_option('srsse_height_display_length_s4', "190_4_20");	
 	add_option('srsse_s4', "http://www.gopiplus.com/extensions/category/joomla-plugin/feed/");
 }
 
@@ -269,123 +269,126 @@ function srsse_shortcode( $atts )
 	
 	$xml = "";
 	$cnt=0;
+	$srsse_count = 0;
+	$srsse_html = "";
+	$IRjsjs = "";
+	$srsse_x = "";
 	$content = @file_get_contents($url);
 	if (strpos($http_response_header[0], "200")) 
 	{
-		$f = fopen( $url, 'r' );
-		while( $data = fread( $f, 4096 ) ) { $xml .= $data; }
-		fclose( $f );
-		preg_match_all( "/\<item\>(.*?)\<\/item\>/s", $xml, $itemblocks );
-	
-		if ( ! empty($itemblocks) ) 
+		
+		include_once( ABSPATH . WPINC . '/feed.php' );
+		$rss = fetch_feed( $url );
+		if ( ! is_wp_error( $rss ) )
 		{
-			$srsse_count = 0;
-			$srsse_html = "";
-			$IRjsjs = "";
-			$srsse_x = "";
-			foreach( $itemblocks[1] as $block )
+			$cnt = 0;
+			$maxitems = $rss->get_item_quantity( 10 ); 
+			$rss_items = $rss->get_items( 0, $maxitems );
+			if ( $maxitems > 0 )
 			{
-				$srsse_target = "_blank";
-				
-				preg_match_all( "/\<title\>(.*?)\<\/title\>/",  $block, $title );
-				preg_match_all( "/\<link\>(.*?)\<\/link\>/", $block, $link );
-				preg_match_all( "/\<description\>(.*?)\<\/description\>/", $block, $description );
-				
-				$srsse_title = $title[1][0];
-				$srsse_title = mysql_real_escape_string(trim($srsse_title));
-				$srsse_link = $link[1][0];
-				$srsse_link = trim($srsse_link);
-				$srsse_text = $description[1][0];
-				$srsse_text = str_replace("&lt;![CDATA[","",$srsse_text);
-				$srsse_text = str_replace("<![CDATA[","",$srsse_text);
-				$srsse_text = str_replace("]]&gt;","",$srsse_text);
-				$srsse_text = str_replace("]]>","",$srsse_text);
-				
-				if(is_numeric($srsse_textlength))
+				foreach ( $rss_items as $item )
 				{
-					if($srsse_textlength <> "" && $srsse_textlength > 0 )
+					$srsse_link = $item->get_permalink();
+					$srsse_title = $item->get_title();
+					$srsse_text = esc_sql($item->get_description());
+					$srsse_target = "_blank";
+					$srsse_text = strip_tags(strip_shortcodes($srsse_text));
+					$words = explode(' ', $srsse_text, $srsse_textlength + 1);
+					if(count($words) > $srsse_textlength)
 					{
-						// $srsse_text = substr($srsse_text, 0, $srsse_textlength);
-						$srsse_text = srsse_excerpt_max_charlength($srsse_textlength, $srsse_text);
+						array_pop($words);
+						array_push($words, '...');
+						$srsse_text = implode(' ', $words);
 					}
-				}
-				
-				$srsse_scrollheights = $srsse_scrollheight."px";	
-				
-				$srsse_html = $srsse_html . "<div class='srsse_div' style='height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;'>"; 
-				
-				if($srsse_title <> "" )
-				{
-					$srsse_html = $srsse_html . "<div style='padding-left:4px;'><strong>";	
-					$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'><strong>";				
-					if($srsse_link <> "" ) 
-					{ 
-						$srsse_html = $srsse_html . "<a href='$srsse_link'>"; 
-						$IRjsjs = $IRjsjs . "<a href=\'$srsse_link\'>";
-					} 
-					$srsse_html = $srsse_html . $srsse_title;
-					$IRjsjs = $IRjsjs . $srsse_title;
-					if($srsse_link <> "" ) 
-					{ 
-						$srsse_html = $srsse_html . "</a>"; 
-						$IRjsjs = $IRjsjs . "</a>";
+					$srsse_text = nl2br($srsse_text);
+					$srsse_text = str_replace("<br>", " ", $srsse_text);
+					$srsse_text = str_replace("<br />", " ", $srsse_text);
+					$srsse_text = str_replace("\r\n", " ", $srsse_text);
+					
+					$srsse_scrollheights = $srsse_scrollheight."px";	
+					$srsse_html = $srsse_html . "<div class='srsse_div' style='height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;'>"; 
+					
+					if($srsse_title <> "" )
+					{
+						$srsse_html = $srsse_html . "<div style='padding-left:4px;'><strong>";	
+						$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'><strong>";				
+						if($srsse_link <> "" ) 
+						{ 
+							$srsse_html = $srsse_html . "<a href='$srsse_link'>"; 
+							$IRjsjs = $IRjsjs . "<a href=\'$srsse_link\'>";
+						} 
+						$srsse_html = $srsse_html . $srsse_title;
+						$IRjsjs = $IRjsjs . $srsse_title;
+						if($srsse_link <> "" ) 
+						{ 
+							$srsse_html = $srsse_html . "</a>"; 
+							$IRjsjs = $IRjsjs . "</a>";
+						}
+						$srsse_html = $srsse_html . "</strong></div>";
+						$IRjsjs = $IRjsjs . "</strong></div>";
 					}
-					$srsse_html = $srsse_html . "</strong></div>";
-					$IRjsjs = $IRjsjs . "</strong></div>";
+					
+					if($srsse_text <> "" )
+					{
+						$srsse_html = $srsse_html . "<div style='padding-left:4px;'>$srsse_text</div>";	
+						$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'>$srsse_text</div>";	
+					}
+					
+					$srsse_html = $srsse_html . "</div>";
+					$srsse_x = $srsse_x . "rssslider[$srsse_count] = '<div class=\'srsse_div\' style=\'height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;\'>$IRjsjs</div>'; ";	
+					$srsse_count++;
+					$IRjsjs = "";
+					$cnt = $cnt + 1;
 				}
-				
-				if($srsse_text <> "" )
-				{
-					$srsse_html = $srsse_html . "<div style='padding-left:4px;'>$srsse_text</div>";	
-					$IRjsjs = $IRjsjs . "<div style=\'padding-left:4px;\'>$srsse_text</div>";	
-				}
-				
-				$srsse_html = $srsse_html . "</div>";
-				
-				$srsse_x = $srsse_x . "rssslider[$srsse_count] = '<div class=\'srsse_div\' style=\'height:".$srsse_scrollheights.";padding:1px 0px 1px 0px;\'>$IRjsjs</div>'; ";	
-				$srsse_count++;
-				$IRjsjs = "";
-			}
 			
-			$srsse_scrollheight = $srsse_scrollheight + 4;
-			if($srsse_count >= $srsse_sametimedisplay)
-			{
-				$srsse_count = $srsse_sametimedisplay;
-				$srsse_scrollheight_New = ($srsse_scrollheight * $srsse_sametimedisplay);
+				$srsse_scrollheight = $srsse_scrollheight + 4;
+				if($srsse_count >= $srsse_sametimedisplay)
+				{
+					$srsse_count = $srsse_sametimedisplay;
+					$srsse_scrollheight_New = ($srsse_scrollheight * $srsse_sametimedisplay);
+				}
+				else
+				{
+					$srsse_count = $srsse_count;
+					$srsse_scrollheight_New = ($srsse_count  * $srsse_scrollheight);
+				}
+				$rssslider = "";
+				$rssslider = $rssslider . '<div style="padding-top:8px;padding-bottom:8px;">';
+				$rssslider = $rssslider . '<div style="text-align:left;vertical-align:middle;text-decoration: none;overflow: hidden; position: relative; margin-left: 3px; height: '. @$srsse_scrollheight .'px;" id="ScrollRssExpertDIV">'.@$srsse_html.'</div>';
+				$rssslider = $rssslider . '</div>';
+				$rssslider = $rssslider . '<script type="text/javascript">';
+				$rssslider = $rssslider . 'var rssslider = new Array();';
+				$rssslider = $rssslider . "var objrssslider	= '';";
+				$rssslider = $rssslider . "var srsse_scrollPos 	= '';";
+				$rssslider = $rssslider . "var srsse_numScrolls	= '';";
+				$rssslider = $rssslider . 'var srsse_heightOfElm = '. @$srsse_scrollheight. ';';
+				$rssslider = $rssslider . 'var srsse_numberOfElm = '. @$srsse_count. ';';
+				$rssslider = $rssslider . "var srsse_scrollOn 	= 'true';";
+				$rssslider = $rssslider . 'function StartScrollRssExcerpt() ';
+				$rssslider = $rssslider . '{';
+				$rssslider = $rssslider . @$srsse_x;
+				$rssslider = $rssslider . "ObjScrollRssExcerpt	= document.getElementById('ScrollRssExpertDIV');";
+				$rssslider = $rssslider . "ObjScrollRssExcerpt.style.height = (srsse_numberOfElm * srsse_heightOfElm) + 'px';";
+				$rssslider = $rssslider . 'ScrollRssExcerptContent();';
+				$rssslider = $rssslider . '}';
+				$rssslider = $rssslider . '</script>';
+				$rssslider = $rssslider . '<script type="text/javascript">';
+				$rssslider = $rssslider . 'StartScrollRssExcerpt();';
+				$rssslider = $rssslider . '</script>';
 			}
 			else
 			{
-				$srsse_count = $srsse_count;
-				$srsse_scrollheight_New = ($srsse_count  * $srsse_scrollheight);
+				$rssslider = "No records found.";
 			}
-			$rssslider = "";
-			$rssslider = $rssslider . '<div style="padding-top:8px;padding-bottom:8px;">';
-			$rssslider = $rssslider . '<div style="text-align:left;vertical-align:middle;text-decoration: none;overflow: hidden; position: relative; margin-left: 3px; height: '. @$srsse_scrollheight .'px;" id="ScrollRssExpertDIV">'.@$srsse_html.'</div>';
-			$rssslider = $rssslider . '</div>';
-			$rssslider = $rssslider . '<script type="text/javascript">';
-			$rssslider = $rssslider . 'var rssslider = new Array();';
-			$rssslider = $rssslider . "var objrssslider	= '';";
-			$rssslider = $rssslider . "var srsse_scrollPos 	= '';";
-			$rssslider = $rssslider . "var srsse_numScrolls	= '';";
-			$rssslider = $rssslider . 'var srsse_heightOfElm = '. @$srsse_scrollheight. ';';
-			$rssslider = $rssslider . 'var srsse_numberOfElm = '. @$srsse_count. ';';
-			$rssslider = $rssslider . "var srsse_scrollOn 	= 'true';";
-			$rssslider = $rssslider . 'function StartScrollRssExcerpt() ';
-			$rssslider = $rssslider . '{';
-			$rssslider = $rssslider . @$srsse_x;
-			$rssslider = $rssslider . "ObjScrollRssExcerpt	= document.getElementById('ScrollRssExpertDIV');";
-			$rssslider = $rssslider . "ObjScrollRssExcerpt.style.height = (srsse_numberOfElm * srsse_heightOfElm) + 'px';";
-			$rssslider = $rssslider . 'ScrollRssExcerptContent();';
-			$rssslider = $rssslider . '}';
-			$rssslider = $rssslider . '</script>';
-			$rssslider = $rssslider . '<script type="text/javascript">';
-			$rssslider = $rssslider . 'StartScrollRssExcerpt();';
-			$rssslider = $rssslider . '</script>';
+		}
+		else 
+		{ 
+			$rssslider = "RSS url is invalid or broken";
 		}
 	}
 	else
 	{
-		$rssslider = __('Invalid or Broken rss link.', 'scroll-rss-excerpt');
+		$rssslider = "RSS url is invalid or broken";
 	}
 	return $rssslider;
 }

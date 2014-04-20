@@ -86,7 +86,8 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 
 = 3.2 =	
 
-Tested up to 3.9
+1. Tested up to 3.9
+2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
 
 == Upgrade Notice ==
 
@@ -113,4 +114,5 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 
 = 3.2 =	
 
-Tested up to 3.9
+1. Tested up to 3.9
+2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
