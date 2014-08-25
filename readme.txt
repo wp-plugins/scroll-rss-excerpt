@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: vertical, marquee, plugin
 Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 3.2
+Tested up to: 4.0
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -28,14 +28,7 @@ This is a user requested plug-in. with this plug-in we can setup the RSS slider 
 2. Widget option for sidebar.
 3. Short code option for posts and pages.
 
-Short code available,	
-
 http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
-
-See the live demo!	
-
-[Demo](http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/)		
-[To see my more plugin](http://www.gopiplus.com/work/plugin-list/)		
 
 == Installation ==
 
@@ -89,6 +82,10 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 1. Tested up to 3.9
 2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
 
+= 3.3 =	
+
+1. Tested up to 4.0
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -116,3 +113,7 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 
 1. Tested up to 3.9
 2. Now it using fetch_feed() wordpress method to load rss feed. (fetch_feed() uses the SimplePie and FeedCache functionality for retrieval and parsing and automatic caching)
+
+= 3.3 =	
+
+1. Tested up to 4.0

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Scroll rss excerpt\n"
-"POT-Creation-Date: 2014-04-20 17:41+0800\n"
-"PO-Revision-Date: 2014-04-20 17:41+0800\n"
+"POT-Creation-Date: 2014-08-02 23:06+0800\n"
+"PO-Revision-Date: 2014-08-02 23:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: www.gopiplus.com <www.gopiplus.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,9 +13,9 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../scroll-rss-excerpt.php:49 ../scroll-rss-excerpt.php:400
-#: ../scroll-rss-excerpt.php:401 ../scroll-rss-excerpt.php:488
-#: ../scroll-rss-excerpt.php:493
+#: ../scroll-rss-excerpt.php:49 ../scroll-rss-excerpt.php:399
+#: ../scroll-rss-excerpt.php:400 ../scroll-rss-excerpt.php:487
+#: ../scroll-rss-excerpt.php:492
 msgid "Scroll rss excerpt"
 msgstr ""
 

@@ -2,9 +2,9 @@
 /*
 Plugin Name: Scroll rss excerpt
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
-Description: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
+Description: With this plugin we can setup the RSS slider in our website. in the slider we can configure the title and excerpt.
 Author: Gopi Ramasamy
-Version: 3.2
+Version: 3.3
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: scroll, rss, excerpt
@@ -273,10 +273,9 @@ function srsse_shortcode( $atts )
 	$srsse_html = "";
 	$IRjsjs = "";
 	$srsse_x = "";
-	$content = @file_get_contents($url);
-	if (strpos($http_response_header[0], "200")) 
-	{
-		
+	//$content = @file_get_contents($url);
+	//if (strpos($http_response_header[0], "200")) 
+	//{	
 		include_once( ABSPATH . WPINC . '/feed.php' );
 		$rss = fetch_feed( $url );
 		if ( ! is_wp_error( $rss ) )
@@ -385,11 +384,11 @@ function srsse_shortcode( $atts )
 		{ 
 			$rssslider = "RSS url is invalid or broken";
 		}
-	}
-	else
-	{
-		$rssslider = "RSS url is invalid or broken";
-	}
+	//}
+	//else
+	//{
+	//	$rssslider = "RSS url is invalid or broken";
+	//}
 	return $rssslider;
 }
 
