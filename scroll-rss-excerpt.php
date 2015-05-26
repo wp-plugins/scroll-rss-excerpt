@@ -4,7 +4,7 @@ Plugin Name: Scroll rss excerpt
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Description: With this plugin we can setup the RSS slider in our website. in the slider we can configure the title and excerpt.
 Author: Gopi Ramasamy
-Version: 3.4
+Version: 3.5
 Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: scroll, rss, excerpt

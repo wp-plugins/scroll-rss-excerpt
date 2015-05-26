@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress
 Plugin URI: http://www.gopiplus.com/work/2012/08/04/scroll-rss-excerpt-wordpress-plugin/
 Tags: vertical, marquee, plugin
 Requires at least: 3.4
-Tested up to: 4.1
-Stable tag: 3.4
+Tested up to: 4.2.2
+Stable tag: 3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -86,6 +86,10 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 
 1. Tested up to 4.0
 
+= 3.5 =
+
+1. Tested up to 4.2.2
+
 == Upgrade Notice ==
 
 = 1.0 =				
@@ -121,3 +125,7 @@ Plugin *.po file (scroll-rss-excerpt.po) available in the languages folder.
 = 3.4 =
 
 1. Tested up to 4.1
+
+= 3.5 =
+
+1. Tested up to 4.2.2
